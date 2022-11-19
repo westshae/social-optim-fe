@@ -8,6 +8,9 @@ const Navigation = (props:any) => {
     <Link href="/">
       <NavLink label="Homepage"/>
     </Link>
+    <Link href="/dashboard">
+      <NavLink label="Dashboard"/>
+    </Link>
     <Link href="/profile">
       <NavLink label="Profile"/>
     </Link>
