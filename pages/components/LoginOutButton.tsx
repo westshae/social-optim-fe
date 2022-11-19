@@ -12,7 +12,6 @@ const LoginOutButton = (props:any) => {
           <Group>
             <Image width={50} src={user?.picture!} alt={user?.name!} />
             <p>{user?.email}</p>
-
           </Group>
         </Link>
         <Link href="/api/auth/logout">
