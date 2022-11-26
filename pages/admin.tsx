@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Navigation from './components/Navigation';
-import { AppShell } from '@mantine/core';
-import Header from './components/Header';
-import { useRouter } from 'next/router';
-import { isLoggedIn } from './interactions/auth';
+import { AppShell } from "@mantine/core";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
+import { isLoggedIn } from "./interactions/auth";
 
-
-export default function Profile() {
+export default function Home() {
   const [displayPage, setDisplayPage] = useState(false);
   useEffect(() => {
     let result = isLoggedIn();
@@ -18,7 +18,7 @@ export default function Profile() {
   if(displayPage){
     return (
       <AppShell padding="md" navbar={<Navigation />} header={<Header />}>
-        <h1>Profile</h1>
+        <h1>Admin Panel</h1>
       </AppShell>
     );
   } else {

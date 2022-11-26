@@ -41,4 +41,16 @@ const login = async (email:string, code?:string) => {
   }
 }
 
-export {login}
+const isLoggedIn = () =>{
+  if (typeof window !== undefined) {
+    let checkEmail = window.localStorage.getItem("email");
+    let checkToken = window.localStorage.getItem("token");
+    if(checkEmail == null || checkToken == null){
+      return false;
+    } else {
+      return true;
+    }
+  }
+}
+
+export {login, isLoggedIn}
