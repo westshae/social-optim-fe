@@ -14,7 +14,7 @@ interface AdminResponse {
 
 const login = async (email:string, code?:string) => {
   let loginData:CheckCodeResponse;
-  let adminData:AdminResponse;
+  let adminData;
 
   try{
     if(email == null) return;
@@ -39,11 +39,9 @@ const login = async (email:string, code?:string) => {
         }
       })).data;
 
-      let isAdmin = (adminData.isAdmin === true ? "true" : "false");
-
       await window.localStorage.setItem("token", loginData.access_token);
       await window.localStorage.setItem("email", email);
-      await window.localStorage.setItem("isAdmin", isAdmin);
+      await window.localStorage.setItem("isAdmin", adminData);
 
       Router.push("/dashboard");
     }
@@ -67,6 +65,7 @@ const isLoggedIn = () =>{
 const isUserAdmin = () => {
   if (typeof window !== undefined) {
     let checkAdmin = window.localStorage.getItem("isAdmin");
+    console.log(checkAdmin);
     if(checkAdmin){
       return (checkAdmin === "true");
     }
