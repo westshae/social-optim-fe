@@ -1,33 +1,43 @@
-import { useUser } from "@auth0/nextjs-auth0";
 import { Button, Group, Image } from "@mantine/core";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const LoginOutButton = (props:any) => {
-  const { user } = useUser();
+  const [loggedIn, setLoggedIn] = useState(false);
 
-  if(user){
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      if (window.localStorage.getItem("token") !== null) {
+        setLoggedIn(true);
+      }
+    }
+  });
+
+  const logout = () =>{
+    if (typeof window !== undefined) {
+      window.localStorage.removeItem("token")
+      setLoggedIn(false);
+    }
+  }
+
+  if(loggedIn){
     return (
       <Group>
         <Link href="/profile">
           <Group>
-            <Image width={50} src={user?.picture!} alt={user?.name!} />
-            <p>{user?.email}</p>
           </Group>
         </Link>
-        <Link href="/api/auth/logout">
-          <Button sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Logout</Button>
-        </Link>
+        <Button onClick={logout} sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Logout</Button>
       </Group>
     )
   }else{
     return (
       <Group>
-        <Link href="/api/auth/login">
+        <Link href="/auth">
           <Button sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Login</Button>
         </Link>
       </Group>
     )
-
   }
 };
 
