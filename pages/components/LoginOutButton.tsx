@@ -8,25 +8,23 @@ const LoginOutButton = (props:any) => {
   const [logOutUser, setLogout] = useState(false);
   const [email, setEmail] = useState('');
 
-  const router = useRouter();
-
 
   useEffect(() => {
     if (typeof window !== undefined) {
       let checkEmail = window.localStorage.getItem("email");
       let checkToken = window.localStorage.getItem("token");
+
       if (checkEmail != null && checkToken != null) {
         setLoggedIn(true);
         setEmail(checkEmail);
-
-        router.push('/dashboard');
       }
     }
-  });
+  }, []);
 
   useEffect(()=>{
     if(logOutUser){
       if (typeof window !== undefined) {
+
         window.localStorage.removeItem("token")
         window.localStorage.removeItem("email")
         setLoggedIn(false);

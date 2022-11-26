@@ -1,4 +1,10 @@
 import axios, {AxiosError} from "axios";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+
+import Router from 'next/router'
+
 interface CheckCodeResponse {
   id:number,
   access_token:string,
@@ -27,6 +33,8 @@ const login = async (email:string, code?:string) => {
 
       await window.localStorage.setItem("token", data.access_token);
       await window.localStorage.setItem("email", email);
+
+      Router.push("/dashboard");
     }
   }catch(error){
     console.error(error);

@@ -7,6 +7,7 @@ import { useForm } from '@mantine/form';
 import { login } from "./interactions/auth";
 
 export default function Home() {
+  const [displayLogin, setDisplayLogin] = useState(false);
 
   let email;
   let token;
@@ -38,29 +39,46 @@ export default function Home() {
     },
   });
 
-  return (
+  const handleSubmit = (email:string, code?:string) =>{
+    if(!code){
+      login(email)
+      setDisplayLogin(!displayLogin);
+
+    } else {
+      login(email, code);
+      setDisplayLogin(!displayLogin);
+    }
+  }
+
+  if(displayLogin){
+    return (
+      <AppShell padding="md" navbar={<Navigation />} header={<Header />}>
+        <Group>
+          <Title>Sign in using emailed code</Title>
+          <form onSubmit={signInForm.onSubmit((values) => handleSubmit(values.email, values.code))}>        
+            <TextInput
+              withAsterisk
+              label="Email"
+              placeholder="your@email.com"
+              {...signInForm.getInputProps('email')}
+            />
+            <TextInput
+              withAsterisk
+              label="Code"
+              placeholder="1234567890"
+              {...signInForm.getInputProps('code')}
+            />
+            <Button type="submit">Submit</Button>
+          </form>
+        </Group>
+      </AppShell>
+    );
+  }else{
+  return(
     <AppShell padding="md" navbar={<Navigation />} header={<Header />}>
       <Group>
-        <Title>Sign in using emailed code</Title>
-        <form onSubmit={signInForm.onSubmit((values) => login(values.email, values.code))}>        
-          <TextInput
-            withAsterisk
-            label="Email"
-            placeholder="your@email.com"
-            {...signInForm.getInputProps('email')}
-          />
-          <TextInput
-            withAsterisk
-            label="Code"
-            placeholder="1234567890"
-            {...signInForm.getInputProps('code')}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Group>
-      <Group>
         <Title>Request code email</Title>
-        <form onSubmit={sendEmailForm.onSubmit((values) => login(values.email))}>        
+        <form onSubmit={sendEmailForm.onSubmit((values) => handleSubmit(values.email))}>
           <TextInput
             withAsterisk
             label="Email"
@@ -70,10 +88,7 @@ export default function Home() {
           <Button type="submit">Submit</Button>
         </form>
       </Group>
-      <h1>Auth</h1>
-      <h1>email: {email}</h1>
-      <h1>token: {token}</h1>
-
     </AppShell>
-  );
+  )}
+  
 }
