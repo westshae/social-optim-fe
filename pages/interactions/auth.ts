@@ -10,8 +10,13 @@ interface CheckCodeResponse {
   access_token:string,
 }
 
+interface AdminResponse {
+  isAdmin:boolean,
+}
+
 const login = async (email:string, code?:string) => {
-  let data:CheckCodeResponse;
+  let loginData:CheckCodeResponse;
+  let adminData:AdminResponse;
 
   try{
     if(email == null) return;
@@ -24,15 +29,23 @@ const login = async (email:string, code?:string) => {
         console.error(e);
       })
     }else{
-      data = (await axios.get("http://localhost:5000/auth/checkcode", {
+      loginData = (await axios.get("http://localhost:5000/auth/checkcode", {
         params:{
           email:email,
           code:code,
         }
       })).data;
+      adminData = (await axios.get("http://localhost:5000/auth/isUserAdmin", {
+        params:{
+          email:email
+        }
+      })).data;
 
-      await window.localStorage.setItem("token", data.access_token);
+      let isAdmin = (adminData.isAdmin === true ? "true" : "false");
+
+      await window.localStorage.setItem("token", loginData.access_token);
       await window.localStorage.setItem("email", email);
+      await window.localStorage.setItem("isAdmin", isAdmin);
 
       Router.push("/dashboard");
     }
@@ -53,4 +66,14 @@ const isLoggedIn = () =>{
   }
 }
 
-export {login, isLoggedIn}
+const isUserAdmin = () => {
+  if (typeof window !== undefined) {
+    let checkAdmin = window.localStorage.getItem("isAdmin");
+    if(checkAdmin){
+      return (checkAdmin === "true");
+    }
+  }
+  return false;
+}
+
+export {login, isLoggedIn, isUserAdmin}
