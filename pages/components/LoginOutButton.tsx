@@ -1,6 +1,5 @@
 import { Button, Group, Image, Text } from "@mantine/core";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const LoginOutButton = (props:any) => {

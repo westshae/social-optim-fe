@@ -1,7 +1,15 @@
 import { Navbar, NavLink } from "@mantine/core";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { isUserAdmin } from "../interactions/auth";
 
-const Navigation = (props:any) => {
+const Navigation = () => {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(()=>{
+    let adminResult = isUserAdmin();
+    if(adminResult) setIsAdmin(adminResult);
+  });
 
  return(
   <Navbar width={{ base: 300 }} height={'100%'} p="xs">
@@ -14,6 +22,11 @@ const Navigation = (props:any) => {
     <Link href="/profile">
       <NavLink label="Profile"/>
     </Link>
+    {isAdmin &&
+    <Link href="/admin">
+      <NavLink label="Admin Panel"/>
+    </Link>
+    }
   </Navbar>
  );
 };

@@ -1,6 +1,4 @@
 import axios, {AxiosError} from "axios";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
 
 
 import Router from 'next/router'
