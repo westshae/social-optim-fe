@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const LoginOutButton = (props:any) => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [logOutUser, setLogout] = useState(false);
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -13,12 +14,15 @@ const LoginOutButton = (props:any) => {
     }
   });
 
-  const logout = () =>{
-    if (typeof window !== undefined) {
-      window.localStorage.removeItem("token")
-      setLoggedIn(false);
+  useEffect(()=>{
+    if(logOutUser){
+      if (typeof window !== undefined) {
+        window.localStorage.removeItem("token")
+        window.localStorage.removeItem("email")
+        setLoggedIn(false);
+      }
     }
-  }
+  }, [logOutUser]);
 
   if(loggedIn){
     return (
@@ -27,7 +31,7 @@ const LoginOutButton = (props:any) => {
           <Group>
           </Group>
         </Link>
-        <Button onClick={logout} sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Logout</Button>
+        <Button onClick={() => setLogout(!logOutUser)} sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Logout</Button>
       </Group>
     )
   }else{

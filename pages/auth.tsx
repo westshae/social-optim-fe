@@ -10,11 +10,13 @@ export default function Home() {
 
   let email;
   let token;
-  if (typeof window !== "undefined") {
-    email = window.localStorage.getItem("email");
-    token = window.localStorage.getItem("token");
-  }
-
+  useEffect(()=>{
+    if (typeof window !== "undefined") {
+      email = window.localStorage.getItem("email");
+      token = window.localStorage.getItem("token");
+    }  
+  }, []);
+  
   const signInForm = useForm({
     initialValues: {
       email: '',
