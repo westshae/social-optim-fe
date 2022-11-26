@@ -27,9 +27,6 @@ const login = async (email:string, code?:string) => {
 
       await window.localStorage.setItem("token", data.access_token);
       await window.localStorage.setItem("email", email);
-      
-
-
     }
   }catch(error){
     console.error(error);

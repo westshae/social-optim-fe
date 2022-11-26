@@ -1,15 +1,25 @@
-import { Button, Group, Image } from "@mantine/core";
+import { Button, Group, Image, Text } from "@mantine/core";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const LoginOutButton = (props:any) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [logOutUser, setLogout] = useState(false);
+  const [email, setEmail] = useState('');
+
+  const router = useRouter();
+
 
   useEffect(() => {
     if (typeof window !== undefined) {
-      if (window.localStorage.getItem("token") !== null) {
+      let checkEmail = window.localStorage.getItem("email");
+      let checkToken = window.localStorage.getItem("token");
+      if (checkEmail != null && checkToken != null) {
         setLoggedIn(true);
+        setEmail(checkEmail);
+
+        router.push('/dashboard');
       }
     }
   });
@@ -29,6 +39,7 @@ const LoginOutButton = (props:any) => {
       <Group>
         <Link href="/profile">
           <Group>
+            <Text>{email}</Text>
           </Group>
         </Link>
         <Button onClick={() => setLogout(!logOutUser)} sx={{color:'#EEEEEE', backgroundColor:'#800000'}}>Logout</Button>
