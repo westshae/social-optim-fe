@@ -65,7 +65,6 @@ const isLoggedIn = () =>{
 const isUserAdmin = () => {
   if (typeof window !== undefined) {
     let checkAdmin = window.localStorage.getItem("isAdmin");
-    console.log(checkAdmin);
     if(checkAdmin){
       return (checkAdmin === "true");
     }

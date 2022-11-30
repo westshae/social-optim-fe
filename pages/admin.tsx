@@ -1,6 +1,8 @@
-import { AppShell } from "@mantine/core";
+import { AppShell, createStyles, Grid } from "@mantine/core";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import GridLink from "./components/GridLink";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import { isLoggedIn, isUserAdmin } from "./interactions/auth";
@@ -15,9 +17,25 @@ export default function Home() {
     if (!adminResult) Router.push("/dashboard");
   }, []);
 
+  const useStyles = createStyles((theme) => ({
+    inner: {
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      height: 60,
+    },
+  }));
+
+  const { classes, cx } = useStyles();
   return (
     <AppShell padding="md" navbar={<Navigation />} header={<Header />}>
-      <h1>Admin Panel</h1>
+      <Grid>
+        <Grid.Col span={4}>
+          <Link href="/addvideos">
+            <GridLink text="Add Videos" imgSrc="https://www.clipartmax.com/png/middle/75-756149_big-image-generic-logo-png-transparent.png"/>
+          </Link>
+        </Grid.Col>
+      </Grid>
     </AppShell>
   );
 }
