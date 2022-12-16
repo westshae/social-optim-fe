@@ -2,9 +2,10 @@ import { AppShell, Button, createStyles, Grid, Group, Textarea, TextInput, Title
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import ThumbnailFrame from "./components/dashboardComponents/ThumbnailFrame";
 import Header from "./components/generalComponents/Header";
 import Navigation from "./components/generalComponents/Navigation";
-import { isLoggedIn, isUserAdmin } from "./interactions/auth";
+import { isLoggedIn } from "./interactions/auth";
 import { uploadMulti } from "./interactions/videos";
 
 export default function Home() {
@@ -12,9 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     const loginResult = isLoggedIn();
-    const adminResult = isUserAdmin();
     if (!loginResult) Router.push("/auth");
-    if (!adminResult) Router.push("/dashboard");
   }, []);
 
   const multiUpload = useForm({
@@ -25,23 +24,12 @@ export default function Home() {
 
   return (
     <AppShell padding="md" navbar={<Navigation />} header={<Header />}>
-      <h1>Add Video</h1>
       <Group>
-        <Title>Add individual video</Title>
+        <Title>Viral Video Learner</Title>
 
       </Group>
       <Group>
-        <Title>Add JSON of videos</Title>
-        <form onSubmit={multiUpload.onSubmit((values) => uploadMulti(values.json))}>        
-            <Textarea
-              withAsterisk
-              label="JSON"
-              placeholder="[{id:'d872jasdh'}...]"
-              {...multiUpload.getInputProps('json')}
-            />
-            <Button type="submit">Submit</Button>
-          </form>
-
+        <ThumbnailFrame id="OK9ZvttHFms" title="title" views={10900} channelName="MrBeast" ratio={1.5}/>
       </Group>
     </AppShell>
   );

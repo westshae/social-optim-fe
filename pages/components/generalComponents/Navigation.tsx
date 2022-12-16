@@ -1,7 +1,7 @@
 import { Navbar, NavLink } from "@mantine/core";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { isUserAdmin } from "../interactions/auth";
+import { isUserAdmin } from "../../interactions/auth";
 
 const Navigation = () => {
   const [isAdmin, setIsAdmin] = useState(false);

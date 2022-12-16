@@ -2,9 +2,9 @@ import { AppShell, createStyles, Grid } from "@mantine/core";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import GridLink from "./components/GridLink";
-import Header from "./components/Header";
-import Navigation from "./components/Navigation";
+import GridLink from "./components/generalComponents/GridLink";
+import Header from "./components/generalComponents/Header";
+import Navigation from "./components/generalComponents/Navigation";
 import { isLoggedIn, isUserAdmin } from "./interactions/auth";
 
 export default function Home() {
