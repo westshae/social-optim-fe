@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Navigation from "./components/generalComponents/Navigation";
+import Navigation from "./components/Navigation";
 import { AppShell } from "@mantine/core";
-import Header from "./components/generalComponents/Header";
+import Header from "./components/Header";
 import { useRouter } from "next/router";
 import { isLoggedIn } from "./interactions/auth";
 

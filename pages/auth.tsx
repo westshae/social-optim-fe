@@ -1,10 +1,10 @@
 import { AppShell, Button, Checkbox, Group, TextInput, Title } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Header from "./components/generalComponents/Header";
+import Header from "./components/Header";
 import { useForm } from '@mantine/form';
 import { login } from "./interactions/auth";
-import Navigation from "./components/generalComponents/Navigation";
+import Navigation from "./components/Navigation";
 
 export default function Home() {
   const [displayLogin, setDisplayLogin] = useState(false);

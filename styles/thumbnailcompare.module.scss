@@ -1,0 +1,45 @@
+
+.textcontainer {
+  margin:0.5em 1em 0.5em 1em;
+  padding: 0.5em 1em 0.5em 1em;
+
+  p {
+    font-size:large;
+  }
+
+  h2 {
+
+  }
+}
+
+
+.cardcontainer {
+  margin:2em;
+  box-shadow: 6px 6px 10px darkgray;
+}
+
+.overallcontainer {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.image {
+  border:0;
+  width:100%;
+}
+
+.channeltext {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  .left {
+    text-align: left;
+  }
+  .right {
+    text-align: right;
+
+  }
+}
+
+.controlpanel > * {
+  
+}

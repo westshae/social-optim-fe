@@ -2,8 +2,8 @@ import { AppShell, Button, createStyles, Grid, Group, Textarea, TextInput, Title
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Header from "./components/generalComponents/Header";
-import Navigation from "./components/generalComponents/Navigation";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
 import { isLoggedIn, isUserAdmin } from "./interactions/auth";
 import { uploadMulti } from "./interactions/videos";
 
