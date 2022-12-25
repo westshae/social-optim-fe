@@ -1,1 +1,7 @@
-<p>header works!</p>
+<div class="container">
+  <span>Title</span>
+  <div class="buttons">
+    <button (click)="login()" class="auth-button" *ngIf="!loggedIn">Log in</button>
+    <button (click)="logout()" class="auth-button" *ngIf="loggedIn">Log out</button>
+  </div>
+</div>
